@@ -1,5 +1,5 @@
-### Slides
-These are my slides for the WAVES session of the Beacon Congress
+## Slides
+These are my slides for the [WAVES](http://mmore500.com/waves/) session of the [2021 BEACON Congress](https://sites.google.com/view/beaconcongress2021/).
 
 ### How to get
 Just clone this repository
@@ -12,9 +12,9 @@ npm install reveal.js
 ```
 
 ### How to run
-You can either use something like
+You can use
 ```
 python3 -m http.server
 ```
-or just open `index.html` in your browser of choice!
+to run this in your browser of choice!
 
