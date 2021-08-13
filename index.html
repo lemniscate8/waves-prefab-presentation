@@ -1,24 +1,139 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css">
-    <link rel="stylesheet" href="/node_modules/reveal.js/dist/theme/white.css">
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/white.css">
+    <link rel="stylesheet" href="node_modules/reveal.js/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="custom-styles.css">
   </head>
   <body>
     <div class="reveal">
+
+      <!-- Title Slide -->
+
       <div class="slides">
         <section>
           <h2>Moving scientific computing to the browser</h2>
           <br>
-          <span>Matthew Andres Moreno, Charles Ofria, Tait Weicht</span>
+          <span>Tait Weicht, Matthew Andres Moreno, Charles Ofria</span>
           <hr>
           <h6>WAVES Session, Aug. 2021</h6>
         </section>
+
+        <!-- Setup Main / Simple stuff -->
+
+        <section data-auto-animate>
+          <p>So you just wrote a C++ program</p>
+          <pre data-id="code-anim">
+          <code class="language-cpp" data-line-numbers data-trim data-noescape>
+          <script type="text/template">
+            #include <string>
+            int main(int argc, int char* argv[]) {
+              // Argument parsing
+
+              // Simulation stuff
+            }
+          </script>
+          </code>
+          </pre>
+          <p>and you want to share it a colleague</p>
+          <div class="fragment fade-up">
+            <p class="fragment highlight-red">...but they aren't too savvy with the command-line</p>
+          </div>
+        </section>
+
+
+        <section data-auto-animate>
+          <p>We're going to add Empirical to the project</p>
+          <pre data-id="code-anim">
+          <code class="language-cpp" data-line-numbers data-trim data-noescape>
+          <script type="text/template">
+            #include <string>
+            int main(int argc, int char* argv[]) {
+              // Argument parsing
+
+              // Simulation stuff
+            }
+          </script>
+          </code>
+          </pre>
+          <p>to turn it into a web application!</p>
+        </section>
+
+        <!-- Begin adding Empirical -->
+
+        <section data-auto-animate>
+          <p>We're going to turn this project into a web application!</p>
+          <pre data-id="code-anim">
+          <code class="language-cpp" data-line-numbers="3" data-trim data-noescape>
+          <script type="text/template">
+            #include <string>
+
+            emp::web::Document doc("my-id")
+
+            int main(int argc, int char* argv[]) {
+              // Argument parsing
+
+              // Simulation stuff
+            }
+          </script>
+          </code>
+          </pre>
+          <p>Let's start with changes to our C++ code.</p>
+        </section>
+
+        <section data-auto-animate>
+          <p>irst, we'll create a document object.</p>
+          <p>This is where all our components will live.</p>
+        </section>
+
+        <!-- Adding a simple button -->
+
+        <section data-auto-animate>
+          <p>irst, we'll create a document object.</p>
+          <p>This is where all our components will live.</p>
+        </section>
+
+        <!-- Button to redraw live variable in div -->
+
+        <section data-auto-animate>
+          <p>Let's confirm this is actually doing something.</p>
+        </section>
+
+        <!-- Readout panel -->
+
+        <section data-auto-animate>
+          <p>But if you've got one thing to show, you probably have a lot more..</p>
+          <p>and we have a solution for that.</p>
+          <p>This is only the bare bones right now.
+            A lot more cool visualization tools exist or are on their way.
+            </p>
+        </section>
+
+        <!-- Adding a config panel -->
+        <section data-auto-animate>
+          <p>Next, we can make this simulation even better by controlling parameters!</p>
+          <p>Would be nice to control this inside the app.</p>
+        </section>
+
+        <section data-auto-animate>
+          <p>If you're using Empirical's configuration system
+          </p>
+          <p>it's simple to add a config panel!</p>
+          <p>The config panel even comes with an easy restart button.</p>
+        </section>
       </div>
     </div>
+
+
+    <!-- Code for initialization -->
+
+    <script src="node_modules/reveal.js/plugin/highlight/highlight.js"></script>
     <script src="node_modules/reveal.js/dist/reveal.js"></script>
     <script>
-      Reveal.initialize();
+      Reveal.initialize({
+        plugins: [ RevealHighlight ]
+      });
     </script>
   </body>
 </html>

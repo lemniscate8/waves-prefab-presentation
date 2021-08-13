@@ -1,0 +1,63 @@
+Outline
+
+So you've just written a super cool command-line tool.
+It runs the simulation your research is based on.
+You've just sent a link to your collaborator, but they can't figure out how to get the same results as you...
+...well actually they can't get the tool to run
+¯\_(ツ)_/¯
+
+Let's see how Empirical can help!
+
+We're going to turn this project into a web application!
+Let's start with changes to our C++ code.
+
+First, we'll create a document object.
+This is where all our components will live.
+
+I'd like a way to run code from my application.
+- Show adding a button
+
+
+Let's confirm this is actually doing something.
+- Note that cout has been redirected to console
+- Demo live variables and button to refresh them.
+
+But if you've got one thing to show, you probably have a lot more...
+and we have a solution for that.
+- Unveil the readout panel
+This is only the bare bones right now.
+A lot more cool visualization tools exist or are on their way.
+
+Next, we can make this simulation even better by controlling parameters!
+- Highlight diagonal
+Would be nice to control this inside the app.
+
+If you're using Empirical's configuration system
+- Show code
+it's simple to add a config panel!
+
+The config panel even comes with an easy restart button.
+
+
+? Mention the control panel ?
+For other simulations we've got a nice start stop button to control it.
+
+If you're just starting out, we've actually got a way to build templates
+- cookie cutter download instructions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
