@@ -4,7 +4,23 @@
     <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
     <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/white.css">
     <link rel="stylesheet" href="node_modules/reveal.js/plugin/highlight/monokai.css">
-    <link rel="stylesheet" href="custom-styles.css">
+    <style>
+      div.columns {
+        display: grid;
+        grid-template-columns: 40% 60%;
+      }
+      iframe.insert-area {
+        width: 100%;
+        height: 75vh;
+      }
+      div.center {
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+      .reveal section p,li {
+        font-size: .8em !important;
+      }
+    </style>
   </head>
   <body>
     <div class="reveal">
@@ -17,43 +33,70 @@
           <br>
           <span>Tait Weicht, Matthew Andres Moreno, Charles Ofria</span>
           <hr>
-          <h6>WAVES Session, Aug. 2021</h6>
+          <h6>BEACON Congress, Aug. 2021</h6>
         </section>
 
         <!-- Setup Main / Simple stuff -->
 
         <section data-auto-animate>
-          <p>So you just wrote a C++ program</p>
-          <pre data-id="code-anim">
-          <code class="language-cpp" data-line-numbers data-trim data-noescape>
-          <script type="text/template">
-            #include <string>
-            int main(int argc, int char* argv[]) {
-              // Argument parsing
+          <section data-auto-animate>
+            <p>So you just wrote a C++ program</p>
+            <pre data-id="code-main">
+            <code class="language-cpp" data-line-numbers data-trim data-noescape>
+            <script type="text/template">
+              #include <iostream>
+              #include <cmath>
 
-              // Simulation stuff
-            }
-          </script>
-          </code>
-          </pre>
-          <p>and you want to share it a colleague</p>
-          <div class="fragment fade-up">
-            <p class="fragment highlight-red">...but they aren't too savvy with the command-line</p>
-          </div>
+              void move(std::vector<int> pt, bool diags = false);
+
+              std::vector<int> random_walker({0,0});
+
+              int main(int argc, int char* argv[]) {
+                for(int i = 0; i < 100; i++) move(random_walker);
+
+                // Print out results: position and distance
+              }
+              // move implementation here
+            </script>
+            </code>
+            </pre>
+            <p>and you want to share it a colleague</p>
+            <ul data-id="reasons-list" class="fragment fade-up">
+              <li>but they are on a different operating system</li>
+            </ul>
+          </section>
+          <section data-auto-animate>
+            <ul data-id="reasons-list">
+              <li>but they are on a different operating system</li>
+              <li class="fragment fade-up" data-fragment-index="1">they don't have time to install dependencies</li>
+              <li class="fragment fade-up" data-fragment-index="2">they prefer to use a tablet</li>
+              <li class="fragment fade-up" data-fragment-index="3">they only have their phone on them right now</li>
+              <li class="fragment fade-up" data-fragment-index="4">etc.</li>
+            </ul>
+            <p></p>
+            <p><a href="#/1">&#8679;</a><p>
+          </section>
         </section>
 
 
         <section data-auto-animate>
           <p>We're going to add Empirical to the project</p>
-          <pre data-id="code-anim">
+          <pre data-id="code-main">
           <code class="language-cpp" data-line-numbers data-trim data-noescape>
           <script type="text/template">
-            #include <string>
-            int main(int argc, int char* argv[]) {
-              // Argument parsing
+            #include <iostream>
+            #include <cmath>
 
-              // Simulation stuff
+            void move(std::vector<int> pt, bool diags = false);
+
+            std::vector<int> random_walker({0,0});
+
+            int main(int argc, int char* argv[]) {
+              for(int i = 0; i < 100; i++) move(random_walker);
+
+              // Print out results: position and distance
             }
+            // move implementation here
           </script>
           </code>
           </pre>
@@ -63,35 +106,92 @@
         <!-- Begin adding Empirical -->
 
         <section data-auto-animate>
-          <p>We're going to turn this project into a web application!</p>
-          <pre data-id="code-anim">
-          <code class="language-cpp" data-line-numbers="3" data-trim data-noescape>
+          <p>Let's start with changes to our C++ code.</p>
+          <pre data-id="code-main">
+          <code class="language-cpp" data-line-numbers="3-5" data-trim data-noescape>
           <script type="text/template">
-            #include <string>
+            #include <iostream>
+            #include <cmath>
+            #include "emp/web/web.hpp"
 
-            emp::web::Document doc("my-id")
+            emp::web::Document doc("emp_base");
+
+            void move(std::vector<int> pt, bool diags = false);
+
+            std::vector<int> random_walker({0,0});
 
             int main(int argc, int char* argv[]) {
-              // Argument parsing
+              for(int i = 0; i < 100; i++) move(random_walker);
 
-              // Simulation stuff
+              // Print out results: position and distance
             }
+            // move implementation here
           </script>
           </code>
           </pre>
-          <p>Let's start with changes to our C++ code.</p>
+          <p class="fragment fade-left">This is where all our components will live.</p>
         </section>
 
-        <section data-auto-animate>
-          <p>irst, we'll create a document object.</p>
-          <p>This is where all our components will live.</p>
+        <section data-auto-animate id="demo-demo">
+          <p>We also need HTML to attach the document to.</p>
+          <div class="columns">
+            <iframe data-id="live-sim" class="insert-area" src="http://[::]:8000/web/waves-prefab-demo.html"></iframe>
+            <div class="center">
+
+              <pre>
+              <code class="language-html" data-line-numbers data-trim data-noescape>
+              <script type="text/template">
+                <!DOCTYPE html>
+                <html>
+                  <head>
+                    <!-- Import bootstrap css -->
+                  </head>
+                  <body>
+                    <h3>Demo demo!</h3>
+                    <div id="emp_base"></div>
+                  </body>
+                  <!-- Run bootstrap scripts -->
+                </html>
+              </script>
+              </code>
+              </pre>
+              <a href="#/demo-demo">&#8634;</a>
+            </div>
+          </div>
         </section>
 
         <!-- Adding a simple button -->
 
         <section data-auto-animate>
-          <p>irst, we'll create a document object.</p>
-          <p>This is where all our components will live.</p>
+          <p>I'd like a way to run code from my application.</p>
+          <div class="columns">
+            <iframe data-id="live-sim" class="insert-area" src="http://[::]:8000/web/waves-prefab-demo.html"></iframe>
+            <div class="center">
+
+              <pre data-id="code-main">
+              <code class="language-cpp" data-line-numbers="12-14" data-trim data-noescape>
+              <script type="text/template">
+                #include <iostream>
+                #include <cmath>
+                #include "emp/web/web.hpp"
+
+                emp::web::Document doc("emp_base");
+
+                void move(std::vector<int> pt, bool diags = false);
+
+                std::vector<int> random_walker({0,0});
+
+                int main(int argc, int char* argv[]) {
+                  doc << emp::web::Button([]() {
+                    move(random_walker);
+                  }, "Step!");
+                }
+                // move implementation here
+              </script>
+              </code>
+              </pre>
+            </div>
+          </div>
         </section>
 
         <!-- Button to redraw live variable in div -->
@@ -103,8 +203,8 @@
         <!-- Readout panel -->
 
         <section data-auto-animate>
-          <p>But if you've got one thing to show, you probably have a lot more..</p>
-          <p>and we have a solution for that.</p>
+          <p>But if you've got one thing to show, you probably have a lot more...</p>
+          <p>and we have a solution for that!</p>
           <p>This is only the bare bones right now.
             A lot more cool visualization tools exist or are on their way.
             </p>
@@ -132,6 +232,7 @@
     <script src="node_modules/reveal.js/dist/reveal.js"></script>
     <script>
       Reveal.initialize({
+        slideNumber: "c/t",
         plugins: [ RevealHighlight ]
       });
     </script>
