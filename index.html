@@ -2,7 +2,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
-    <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/white.css">
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/sky.css">
     <link rel="stylesheet" href="node_modules/reveal.js/plugin/highlight/monokai.css">
     <style>
       div.columns {
@@ -11,7 +11,6 @@
       }
       iframe.insert-area {
         width: 100%;
-        height: 75vh;
       }
       div.center {
         margin-top: auto;
@@ -36,31 +35,40 @@
           <h6>BEACON Congress, Aug. 2021</h6>
         </section>
 
+        <section data-auto-animate>
+          <h5>What's this talk about</h5>
+          <ul>
+            <li class="fragment fade-left" data-fragment-index="0">What I've been doing all summer</li>
+            <li class="fragment fade-left" data-fragment-index="1">Specifically, <span class="fragment highlight-blue" data-fragment-index="2">Empirical's prefab components</span></li>
+            <li class="fragment fade-left" data-fragment-index="3">Generally, quickly converting a command-line tool to a web application</li>
+          </ul>
+        </section>
+
         <!-- Setup Main / Simple stuff -->
 
         <section data-auto-animate>
-          <section data-auto-animate>
-            <p>So you just wrote a C++ program</p>
+          <section data-auto-animate id="reasons">
+            <p>So I just wrote a C++ program</p>
             <pre data-id="code-main">
-            <code class="language-cpp" data-line-numbers data-trim data-noescape>
+            <code class="hljs language-cpp" data-line-numbers data-trim data-noescape>
             <script type="text/template">
               #include <iostream>
               #include <cmath>
 
-              void move(std::vector<int> pt, bool diags = false);
+              void take_step(std::vector<int> pt, bool diags = false);
 
               std::vector<int> random_walker({0,0});
 
               int main(int argc, int char* argv[]) {
-                for(int i = 0; i < 100; i++) move(random_walker);
+                for(int i = 0; i < 100; i++) take_step(random_walker);
 
                 // Print out results: position and distance
               }
-              // move implementation here
+              // take_step implementation here
             </script>
             </code>
             </pre>
-            <p>and you want to share it a colleague</p>
+            <p>and I want to share it a colleague</p>
             <ul data-id="reasons-list" class="fragment fade-up">
               <li>but they are on a different operating system</li>
             </ul>
@@ -74,7 +82,7 @@
               <li class="fragment fade-up" data-fragment-index="4">etc.</li>
             </ul>
             <p></p>
-            <p><a href="#/1">&#8679;</a><p>
+            <p><a href="#/reasons">&#8679;</a><p>
           </section>
         </section>
 
@@ -87,16 +95,16 @@
             #include <iostream>
             #include <cmath>
 
-            void move(std::vector<int> pt, bool diags = false);
+            void take_step(std::vector<int> pt, bool diags = false);
 
             std::vector<int> random_walker({0,0});
 
             int main(int argc, int char* argv[]) {
-              for(int i = 0; i < 100; i++) move(random_walker);
+              for(int i = 0; i < 100; i++) take_step(random_walker);
 
               // Print out results: position and distance
             }
-            // move implementation here
+            // take_step implementation here
           </script>
           </code>
           </pre>
@@ -116,16 +124,16 @@
 
             emp::web::Document doc("emp_base");
 
-            void move(std::vector<int> pt, bool diags = false);
+            void take_step(std::vector<int> pt, bool diags = false);
 
             std::vector<int> random_walker({0,0});
 
             int main(int argc, int char* argv[]) {
-              for(int i = 0; i < 100; i++) move(random_walker);
+              for(int i = 0; i < 100; i++) take_step(random_walker);
 
               // Print out results: position and distance
             }
-            // move implementation here
+            // take_step implementation here
           </script>
           </code>
           </pre>
@@ -135,7 +143,7 @@
         <section data-auto-animate id="demo-demo">
           <p>We also need HTML to attach the document to.</p>
           <div class="columns">
-            <iframe data-id="live-sim" class="insert-area" src="http://[::]:8000/web/waves-prefab-demo.html"></iframe>
+            <iframe data-id="live-sim" class="insert-area r-stretch" src="http://[::]:8000/web/waves-prefab-demo.html?HIDE_STEP=1&HIDE_CLICK=1&HIDE_READOUT=1&HIDE_CONFIG=1&HIDE_SUPER_SECRET=1"></iframe>
             <div class="center">
 
               <pre>
@@ -165,28 +173,28 @@
         <section data-auto-animate>
           <p>I'd like a way to run code from my application.</p>
           <div class="columns">
-            <iframe data-id="live-sim" class="insert-area" src="http://[::]:8000/web/waves-prefab-demo.html"></iframe>
+            <iframe data-id="live-sim" class="insert-area r-stretch" src="http://[::]:8000/web/waves-prefab-demo.html?HIDE_CLICK=1&HIDE_READOUT=1&HIDE_CONFIG=1&HIDE_SUPER_SECRET=1"></iframe>
             <div class="center">
-
               <pre data-id="code-main">
-              <code class="language-cpp" data-line-numbers="12-14" data-trim data-noescape>
+              <code class="language-cpp" data-line-numbers="4|13-15" data-trim data-noescape>
               <script type="text/template">
                 #include <iostream>
                 #include <cmath>
                 #include "emp/web/web.hpp"
+                #include "emp/web/Button.hpp"
 
                 emp::web::Document doc("emp_base");
 
-                void move(std::vector<int> pt, bool diags = false);
+                void take_step(std::vector<int> pt, bool diags = false);
 
                 std::vector<int> random_walker({0,0});
 
                 int main(int argc, int char* argv[]) {
                   doc << emp::web::Button([]() {
-                    move(random_walker);
+                    take_step(random_walker);
                   }, "Step!");
                 }
-                // move implementation here
+                // take_step implementation here
               </script>
               </code>
               </pre>
@@ -198,29 +206,201 @@
 
         <section data-auto-animate>
           <p>Let's confirm this is actually doing something.</p>
+          <div class="columns">
+            <iframe data-id="live-sim" class="insert-area r-stretch" src="http://[::]:8000/web/waves-prefab-demo.html?HIDE_READOUT=1&HIDE_CONFIG=1&HIDE_SUPER_SECRET=1"></iframe>
+            <div class="center">
+              <pre data-id="code-main">
+              <code class="language-cpp" data-line-numbers="4-5|18-23" data-trim data-noescape>
+              <script type="text/template">
+                #include <iostream>
+                #include <cmath>
+                #include "emp/web/web.hpp"
+                #include "emp/web/Button.hpp"
+                #include "emp/web/Element.hpp"
+
+                emp::web::Document doc("emp_base");
+
+                void take_step(std::vector<int> pt, bool diags = false);
+
+                std::vector<int> random_walker({0,0});
+
+                int main(int argc, int char* argv[]) {
+                  doc << emp::web::Button([]() {
+                    take_step(random_walker);
+                  }, "Step!");
+
+                  emp::web::Element live{"span", "live"};
+                  doc << emp::web::Button([live]() mutable {
+                    live.Redraw();
+                  }, "Show me");
+                  live << emp::web::Live(random_walker);
+                  doc << live;
+                }
+                // take_step implementation here
+              </script>
+              </code>
+              </pre>
+            </div>
+          </div>
         </section>
 
         <!-- Readout panel -->
 
         <section data-auto-animate>
           <p>But if you've got one thing to show, you probably have a lot more...</p>
+          <p class="fragment fade-left">and we have a solution for that!</p>
+          <pre data-id="code-main">
+          <code class="language-cpp" data-line-numbers="19-24|26-33" data-trim data-noescape>
+          <script type="text/template">
+            #include <iostream>
+            #include <cmath>
+            #include "emp/web/web.hpp"
+            #include "emp/web/Button.hpp"
+            #include "emp/web/Element.hpp"
+            #include "emp/prefab/ReadoutPanel.hpp"
+
+            emp::web::Document doc("emp_base");
+
+            void take_step(std::vector<int> pt, bool diags = false);
+
+            std::vector<int> random_walker({0,0});
+
+            int main(int argc, int char* argv[]) {
+              doc << emp::web::Button([]() {
+                take_step(random_walker);
+              }, "Step!");
+
+              emp::web::Element live{"span", "live"};
+              doc << emp::web::Button([live]() mutable {
+                live.Redraw();
+              }, "Show me");
+              live << emp::web::Live(random_walker);
+              doc << live;
+
+              emp::prefab::ReadoutPanel stats{"Stats", 250};
+              stats.AddValues(
+                "Position", "the xy-coordinates of the random walker",
+                random_walker,
+                "Distance", "distance from the origin",
+                []() { return distance(random_walker); }
+              );
+              readout << stats;
+            }
+            // take_step, distance implementation here
+          </script>
+          </code>
+          </pre>
+        </section>
+
+        <section data-auto-animate>
+          <p>But if you've got one thing to show, you probably have a lot more...</p>
           <p>and we have a solution for that!</p>
-          <p>This is only the bare bones right now.
-            A lot more cool visualization tools exist or are on their way.
-            </p>
+          <iframe data-id="live-sim" class="insert-area r-stretch" src="http://[::]:8000/web/waves-prefab-demo.html?HIDE_CONFIG=1&HIDE_SUPER_SECRET=1"></iframe>
+          <p class="fragment fade-up" data-fragment-index="2">This is only the bare bones right now. A lot more cool visualization tools exist or are on their way. </p>
         </section>
 
         <!-- Adding a config panel -->
         <section data-auto-animate>
           <p>Next, we can make this simulation even better by controlling parameters!</p>
-          <p>Would be nice to control this inside the app.</p>
+          <pre data-id="code-main">
+          <code class="language-cpp" data-line-numbers="26-33|10" data-trim data-noescape>
+          <script type="text/template">
+            #include <iostream>
+            #include <cmath>
+            #include "emp/web/web.hpp"
+            #include "emp/web/Button.hpp"
+            #include "emp/web/Element.hpp"
+            #include "emp/prefab/ReadoutPanel.hpp"
+
+            emp::web::Document doc("emp_base");
+
+            void take_step(std::vector<int> pt, bool diags = false);
+
+            std::vector<int> random_walker({0,0});
+
+            int main(int argc, int char* argv[]) {
+              doc << emp::web::Button([]() {
+                take_step(random_walker);
+              }, "Step!");
+
+              emp::web::Element live{"span", "live"};
+              doc << emp::web::Button([live]() mutable {
+                live.Redraw();
+              }, "Show me");
+              live << emp::web::Live(random_walker);
+              doc << live;
+
+              emp::prefab::ReadoutPanel stats{"Stats", 250};
+              stats.AddValues(
+                "Position", "the xy-coordinates of the random walker",
+                random_walker,
+                "Distance", "distance from the origin",
+                []() { return distance(random_walker); }
+              );
+              readout << stats;
+            }
+            // take_step, distance implementation here
+          </script>
+          </code>
+          </pre>
+          <p class="fragment fade-up" data-fragment-index="1">Would be nice to control this boolean inside the app.</p>
         </section>
 
         <section data-auto-animate>
-          <p>If you're using Empirical's configuration system
-          </p>
-          <p>it's simple to add a config panel!</p>
+          <p>If you're already using Empirical's configuration system, it's simple to add a config panel!</p>
+          <pre data-id="code-main">
+            <code class="language-cpp" data-line-numbers="9|7,10" data-trim data-noescape>
+            <script type="text/template">
+              #include <iostream>
+              #include <cmath>
+              #include "emp/web/web.hpp"
+              #include "emp/web/Button.hpp"
+              #include "emp/web/Element.hpp"
+              #include "emp/prefab/ReadoutPanel.hpp"
+              #include "waves-prefab-demo/DemoConfig.hpp"
+
+              emp::web::Document doc("emp_base");
+              waves_prefab_demo::Config cfg;
+
+              void take_step(std::vector<int> pt, bool diags = false);
+
+              std::vector<int> random_walker({0,0});
+
+              int main(int argc, int char* argv[]) {
+                doc << emp::web::Button([]() {
+                  take_step(random_walker);
+                }, "Step!");
+
+                emp::web::Element live{"span", "live"};
+                doc << emp::web::Button([live]() mutable {
+                  live.Redraw();
+                }, "Show me");
+                live << emp::web::Live(random_walker);
+                doc << live;
+
+                emp::prefab::ReadoutPanel stats{"Stats", 250};
+                stats.AddValues(
+                  "Position", "the xy-coordinates of the random walker",
+                  random_walker,
+                  "Distance", "distance from the origin",
+                  []() { return distance(random_walker); }
+                );
+                readout << stats;
+
+                emp::prefab::ConfigPanel config_panel(cfg, false, "pconfig");
+                config_panel.SetRange("SEED", "-1", "100", "1");
+                config << config_panel;
+              }
+              // take_step, distance implementation here
+            </script>
+            </code>
+            </pre>
           <p>The config panel even comes with an easy restart button.</p>
+        </section>
+
+        <section data-auto-animate>
+          <iframe data-id="live-sim" class="insert-area r-stretch" src="http://[::]:8000/web/waves-prefab-demo.html?HIDE_SUPER_SECRET=1"></iframe>
+          <p class="fragment fade-up">The config panel even comes with an easy restart button.</p>
         </section>
       </div>
     </div>
