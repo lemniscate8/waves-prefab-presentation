@@ -42,6 +42,7 @@
             <li class="fragment fade-left" data-fragment-index="1">Specifically, <span class="fragment highlight-blue" data-fragment-index="2">Empirical's prefab components</span></li>
             <li class="fragment fade-left" data-fragment-index="3">Generally, quickly converting a command-line tool to a web application</li>
           </ul>
+          <img class="fragment fade-left" data-fragment-index="4" style="width: 50%; height: auto;" src="images/EmpiricalBanner.png">
         </section>
 
         <!-- Setup Main / Simple stuff -->
@@ -88,7 +89,7 @@
 
 
         <section data-auto-animate>
-          <p>We're going to add Empirical to the project</p>
+          <p>We're going to add Empirical to the project,</p>
           <pre data-id="code-main">
           <code class="language-cpp" data-line-numbers data-trim data-noescape>
           <script type="text/template">
@@ -108,7 +109,8 @@
           </script>
           </code>
           </pre>
-          <p>to turn it into a web application!</p>
+          <p>compile with <span style="color: green;">emscripten</span> and turn it into a web application!</p>
+          <div class="fragment fade-up"><img src="images/Emscripten_logo.png" class="r-stretch"></div>
         </section>
 
         <!-- Begin adding Empirical -->
@@ -296,7 +298,7 @@
           <p>But if you've got one thing to show, you probably have a lot more...</p>
           <p>and we have a solution for that!</p>
           <iframe data-id="live-sim" class="insert-area r-stretch" src="http://[::]:8000/web/waves-prefab-demo.html?HIDE_CONFIG=1&HIDE_SUPER_SECRET=1"></iframe>
-          <p class="fragment fade-up" data-fragment-index="2">This is only the bare bones right now. A lot more cool visualization tools exist or are on their way. </p>
+          <p class="fragment fade-up" data-fragment-index="2">The ReadoutPanel is very minimal. A lot more cool visualization tools exist or are on their way.</p>
         </section>
 
         <!-- Adding a config panel -->
@@ -337,7 +339,7 @@
                 "Distance", "distance from the origin",
                 []() { return distance(random_walker); }
               );
-              readout << stats;
+              doc << stats;
             }
             // take_step, distance implementation here
           </script>
@@ -349,7 +351,7 @@
         <section data-auto-animate>
           <p>If you're already using Empirical's configuration system, it's simple to add a config panel!</p>
           <pre data-id="code-main">
-            <code class="language-cpp" data-line-numbers="9|7,10" data-trim data-noescape>
+            <code class="language-cpp" data-line-numbers="7-8,11|38-40" data-trim data-noescape>
             <script type="text/template">
               #include <iostream>
               #include <cmath>
@@ -357,6 +359,7 @@
               #include "emp/web/Button.hpp"
               #include "emp/web/Element.hpp"
               #include "emp/prefab/ReadoutPanel.hpp"
+              #include "emp/prefab/ConfigPanel.hpp"
               #include "waves-prefab-demo/DemoConfig.hpp"
 
               emp::web::Document doc("emp_base");
@@ -385,22 +388,43 @@
                   "Distance", "distance from the origin",
                   []() { return distance(random_walker); }
                 );
-                readout << stats;
+                doc << stats;
 
                 emp::prefab::ConfigPanel config_panel(cfg, false, "pconfig");
                 config_panel.SetRange("SEED", "-1", "100", "1");
-                config << config_panel;
+                doc << config_panel;
               }
               // take_step, distance implementation here
             </script>
             </code>
             </pre>
-          <p>The config panel even comes with an easy restart button.</p>
         </section>
 
         <section data-auto-animate>
           <iframe data-id="live-sim" class="insert-area r-stretch" src="http://[::]:8000/web/waves-prefab-demo.html?HIDE_SUPER_SECRET=1"></iframe>
           <p class="fragment fade-up">The config panel even comes with an easy restart button.</p>
+        </section>
+
+        <section data-auto-animate>
+          <p>What if you're just starting out?</p>
+          <h4 class="fragment fade-up" data-fragment-index="0">Cookiecutter Empirical Project</h4>
+          <ol>
+            <li class="fragment fade-up" data-fragment-index="1">A template that sets up the necessary files for you!</li>
+            <li class="fragment fade-up" data-fragment-index="2">Auto-deployment of your project on GitHub pages</li>
+            <li class="fragment fade-up" data-fragment-index="3">Comes with an example of Empirical's configuration system</li>
+          </ol>
+        </section>
+
+        <section data-auto-animate>
+          <h3>Acknowledgements</h3>
+          <p style="text-align: left;">A special thanks to Matthew, my mentor on this project, for all the support and guidance!</p>
+          <p style="text-align: left;">This work is supported through Active LENS: Learning Evolution and the Nature of Science using Evolution in Action (NSF IUSE #1432563). Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.</p>
+          <img class="r-stretch" src="images/NSF.png">
+        </section>
+
+        <section>
+          <h4>Behind the Scenes</h4>
+          <iframe data-id="live-sim" class="insert-area r-stretch" src="http://[::]:8000/web/waves-prefab-demo.html"></iframe>
         </section>
       </div>
     </div>
