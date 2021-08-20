@@ -355,7 +355,7 @@
         <section data-auto-animate>
           <p>If you're already using Empirical's configuration system, it's simple to add a config panel!</p>
           <pre data-id="code-main">
-            <code class="language-cpp" data-line-numbers="7-8,11|38-40" data-trim data-noescape>
+            <code class="language-cpp" data-line-numbers="7-8,11|19|38-40" data-trim data-noescape>
             <script type="text/template">
               #include <iostream>
               #include <cmath>
@@ -375,7 +375,7 @@
 
               int main(int argc, int char* argv[]) {
                 doc << emp::web::Button([]() {
-                  take_step(random_walker);
+                  take_step(random_walker, cfg.ALLOW_DIAGONALS());
                 }, "Step!");
 
                 emp::web::Div state;
